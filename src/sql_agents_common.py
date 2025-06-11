@@ -61,23 +61,39 @@ def create_token_counter(provider="openai", model_name=None):
     """Factory function to create a token counter for the specified provider"""
     return TokenCounter(provider=provider, model_name=model_name)
 
+def substitute_env_vars(config_dict):
+    """Recursively substitute environment variables in config dictionary"""
+    if isinstance(config_dict, dict):
+        return {key: substitute_env_vars(value) for key, value in config_dict.items()}
+    elif isinstance(config_dict, list):
+        return [substitute_env_vars(item) for item in config_dict]
+    elif isinstance(config_dict, str) and config_dict.startswith("${") and config_dict.endswith("}"):
+        # Extract environment variable name
+        env_var = config_dict[2:-1]
+        return os.getenv(env_var, config_dict)  # Return original if env var not found
+    else:
+        return config_dict
+
 def get_database_connection():
-    """Create a PostgreSQL database connection using config from conf/config.json"""
+    """Create a PostgreSQL database connection using config from conf/config.json with environment variable substitution"""
     try:
         # Load database configuration
         with open("conf/config.json", "r") as f:
             db_config = json.load(f)
         
+        # Substitute environment variables
+        db_config = substitute_env_vars(db_config)
+        
         # Extract PostgreSQL configuration
         pg_config = db_config.get("postgres", {})
         
-        # Create connection
+        # Create connection with fallback values from environment variables
         conn = psycopg2.connect(
-            host=pg_config.get("host", "localhost"),
-            dbname=pg_config.get("dbname", "postgres"),
-            user=pg_config.get("user", "postgres"),
-            password=pg_config.get("password", "admin"),
-            port=pg_config.get("port", "5432")
+            host=pg_config.get("host", os.getenv("DB_HOST", "localhost")),
+            dbname=pg_config.get("dbname", os.getenv("DB_NAME", "postgres")),
+            user=pg_config.get("user", os.getenv("DB_USER", "postgres")),
+            password=pg_config.get("password", os.getenv("DB_PASSWORD", "admin")),
+            port=pg_config.get("port", os.getenv("DB_PORT", "5432"))
         )
         
         return conn
