@@ -8,6 +8,10 @@ import glob
 from datetime import datetime
 import time
 import sys
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 st.set_page_config(
     page_title="SQL Agent Interface",

@@ -35,7 +35,13 @@ table_schemas = get_semantic_model()
 def get_sql_router_agent_instructions():
     return """You are an orchestrator of different SQL data experts and it is your job to
     determine which of the agent is best suited to handle the user's request, 
-    and transfer the conversation to that agent."""
+    and transfer the conversation to that agent.
+    
+    IMPORTANT: You should ONLY transfer to the appropriate agent. Do NOT write SQL queries yourself.
+    Do NOT include any SQL statements in your transfer function calls.
+    
+    For questions about likes, articles, user interactions, or any data queries, transfer to the Data Query Agent.
+    The Data Query Agent has access to the database schema and will write the appropriate SQL queries."""
 
 def get_sql_agent_instructions(list_of_columns):
     # Format tables information
@@ -99,13 +105,16 @@ def transfer_back_to_router_agent(*args, **kwargs):
     """Call this function if a user is asking about data that is not handled by the current agent."""
     return sql_router_agent
 
-def transfer_to_data_query_agent(*args, **kwargs):
+def transfer_to_data_query_agent():
+    """Transfer to the Data Query Agent for database queries. Do not pass any SQL statements."""
     return data_query_agent
 
-def transfer_to_user_agent(*args, **kwargs):
+def transfer_to_user_agent():
+    """Transfer to the User Agent for user-related queries."""
     return user_agent
 
-def transfer_to_analytics_agent(*args, **kwargs):
+def transfer_to_analytics_agent():
+    """Transfer to the Analytics Agent for analytical queries."""
     return analytics_agent
 
 sql_router_agent.functions = [transfer_to_data_query_agent, transfer_to_user_agent, transfer_to_analytics_agent]
