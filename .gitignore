@@ -15,6 +15,7 @@ output/
 
 # Files
 .DS_Store
+*_OLD.py
 
 # Logs
 *.log

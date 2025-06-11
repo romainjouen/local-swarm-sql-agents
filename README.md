@@ -131,8 +131,15 @@ git branch -M main
 git push -u origin main
 
 # Mise à jour
-git status
+git status #Check what's changed
+git add . #Add all changes
+# OR add specific files
+git add README.md .gitignore
 
+git commit -m "Update README and add .gitignore file"
+git push
+#If you're on a branch other than main
+git push origin <your-branch-name> 
 ```
 
 This will start a local web server and open the application in your browser. From the interface, you can:
