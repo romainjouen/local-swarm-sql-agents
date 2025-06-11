@@ -1,0 +1,146 @@
+{
+    "tables": [
+        {
+            "table_name": "users",
+            "table_description": "Contains user information including user preferences and authentication details.",
+            "Use Case": "Use this table to get user information, preferences, and authentication status."
+        },
+        {
+            "table_name": "restaurants",
+            "table_description": "Contains restaurant information including name, location, and other details.",
+            "Use Case": "Use this table to get restaurant information and details."
+        },
+        {
+            "table_name": "menus",
+            "table_description": "Contains menu items and their details for each restaurant.",
+            "Use Case": "Use this table to get menu information for restaurants."
+        },
+        {
+            "table_name": "reservations",
+            "table_description": "Contains reservation information linking users to restaurants.",
+            "Use Case": "Use this table to get reservation details and history."
+        },
+        {
+            "table_name": "rss_feeds",
+            "table_description": "Contains RSS feed sources and their configuration.",
+            "Use Case": "Use this table to get information about available RSS feeds."
+        },
+        {
+            "table_name": "rss_items",
+            "table_description": "Contains individual RSS feed items and their content.",
+            "Use Case": "Use this table to get RSS feed content and articles."
+        },
+        {
+            "table_name": "categories",
+            "table_description": "Contains category information for both restaurants and RSS items.",
+            "Use Case": "Use this table to get category information and classifications."
+        },
+        {
+            "table_name": "rss_item_categories",
+            "table_description": "Links RSS items to their categories.",
+            "Use Case": "Use this table to get category assignments for RSS items."
+        },
+        {
+            "table_name": "user_category_preferences",
+            "table_description": "Stores user preferences for different categories.",
+            "Use Case": "Use this table to get user category preferences."
+        },
+        {
+            "table_name": "user_feed_preferences",
+            "table_description": "Stores user preferences for different RSS feeds.",
+            "Use Case": "Use this table to get user feed preferences."
+        },
+        {
+            "table_name": "article_interactions",
+            "table_description": "Tracks user interactions with RSS articles.",
+            "Use Case": "Use this table to get user engagement data with articles."
+        },
+        {
+            "table_name": "feed_views",
+            "table_description": "Tracks user views of RSS feeds.",
+            "Use Case": "Use this table to get feed view statistics."
+        },
+        {
+            "table_name": "user_sessions",
+            "table_description": "Tracks user session information and activity.",
+            "Use Case": "Use this table to get user session data and activity history."
+        }
+    ],
+    "relationships": [
+        {
+            "from_table": "reservations",
+            "to_table": "users",
+            "relationship": "Many reservations belong to one user"
+        },
+        {
+            "from_table": "reservations",
+            "to_table": "restaurants",
+            "relationship": "Many reservations belong to one restaurant"
+        },
+        {
+            "from_table": "menus",
+            "to_table": "restaurants",
+            "relationship": "Many menus belong to one restaurant"
+        },
+        {
+            "from_table": "rss_items",
+            "to_table": "rss_feeds",
+            "relationship": "Many RSS items belong to one RSS feed"
+        },
+        {
+            "from_table": "rss_item_categories",
+            "to_table": "rss_items",
+            "relationship": "Many category assignments belong to one RSS item"
+        },
+        {
+            "from_table": "rss_item_categories",
+            "to_table": "categories",
+            "relationship": "Many category assignments belong to one category"
+        },
+        {
+            "from_table": "user_category_preferences",
+            "to_table": "users",
+            "relationship": "Many category preferences belong to one user"
+        },
+        {
+            "from_table": "user_category_preferences",
+            "to_table": "categories",
+            "relationship": "Many category preferences belong to one category"
+        },
+        {
+            "from_table": "user_feed_preferences",
+            "to_table": "users",
+            "relationship": "Many feed preferences belong to one user"
+        },
+        {
+            "from_table": "user_feed_preferences",
+            "to_table": "rss_feeds",
+            "relationship": "Many feed preferences belong to one RSS feed"
+        },
+        {
+            "from_table": "article_interactions",
+            "to_table": "users",
+            "relationship": "Many article interactions belong to one user"
+        },
+        {
+            "from_table": "article_interactions",
+            "to_table": "rss_items",
+            "relationship": "Many article interactions belong to one RSS item"
+        },
+        {
+            "from_table": "feed_views",
+            "to_table": "users",
+            "relationship": "Many feed views belong to one user"
+        },
+        {
+            "from_table": "feed_views",
+            "to_table": "rss_feeds",
+            "relationship": "Many feed views belong to one RSS feed"
+        },
+        {
+            "from_table": "user_sessions",
+            "to_table": "users",
+            "relationship": "Many sessions belong to one user"
+        }
+    ]
+} 

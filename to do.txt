@@ -1,0 +1,7 @@
+- refactor les éléments en double dans sql_agents_common.py : 
+    > connection
+    > router model : plus dynamique / variable ; peut-être que pour openai prendre gpt-3.5 
+        => check ce qui a été fait dans : /Users/romainjouen/Documents/WORK/DEV/_AI/_ARCHIVES/local-swarm-agent/V1.6_mixed
+- check pourquoi "run_openai.py" n'a pas marché lors de la préz' avec David
+- tenter d'implémenter : gemini et deepseek
+- interface graphique

@@ -1,0 +1,28 @@
+{
+    "postgres": {
+        "host": "localhost",
+        "dbname": "postgres",
+        "user": "postgres",
+        "password": "admin",
+        "port": "5432"
+    },
+    "models": {
+        "openai": {
+            "default": "gpt-4o-mini",
+            "router": "gpt-4o-mini",
+            "alternatives": ["gpt-4o", "gpt-3.5-turbo"]
+        },
+        "ollama": {
+            "default": "qwen2.5-coder:32b",
+            "router": "llama3.3",
+            "alternatives": [
+                "qwen2.5-coder:32b",
+                "qwen2.5-coder",
+                "qwen2.5-coder:3b",
+                "llama3.3",
+                "qwq",
+                "mistral-small3.1"
+            ]
+        }
+    }
+} 
