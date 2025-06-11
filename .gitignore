@@ -13,6 +13,9 @@ _demo/
 gradio_app/
 output/
 
+# Files
+.DS_Store
+
 # Logs
 *.log
 

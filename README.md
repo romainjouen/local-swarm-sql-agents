@@ -121,6 +121,20 @@ For a user-friendly web interface, run:
 streamlit run app.py
 ```
 
+### Github commands
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/romainjouen/local-swarm-sql-agents.git
+git branch -M main
+git push -u origin main
+
+# Mise à jour
+git status
+
+```
+
 This will start a local web server and open the application in your browser. From the interface, you can:
 - Select your preferred LLM provider (OpenAI or Ollama)
 - Enter natural language queries for your database
