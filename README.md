@@ -144,6 +144,16 @@ git push origin <your-branch-name>
 git rm --cached <file_name>
 git commit -m "Remove <file_name> from the repository"
 git push
+
+# Retrieve the project from Github
+git clone https://github.com/romainjouen/local-swarm-sql-agents.git
+cd local-swarm-sql-agents
+
+# Set up your virtual environment
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
 ```
 
 This will start a local web server and open the application in your browser. From the interface, you can:
